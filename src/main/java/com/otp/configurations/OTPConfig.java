@@ -10,24 +10,15 @@ public class OTPConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-//		super.configure(auth);
+		super.configure(auth);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-		.authorizeHttpRequests()
-		.antMatchers("/generateOTP")
-		.permitAll()
-		.anyRequest().authenticated();
-		
-		
-		
-		
+		http.csrf().disable().authorizeHttpRequests().antMatchers("/api/v1.0.0/otp/generateOTP").permitAll()
+				.antMatchers("/api/v1.0.0/otp/validateOTPs").permitAll().antMatchers("/api/v1.0.0/otp/resendOTP")
+				.permitAll().anyRequest().authenticated();
+
 	}
 
-	
-	
-	
 }
